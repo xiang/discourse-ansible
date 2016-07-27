@@ -1,0 +1,12 @@
+email = ENV['DISCOURSE_ADMIN_EMAIL']
+unless User.find_by_email(email)
+  admin = User.new(email: email)
+  admin.active = true
+  admin.password = ENV['DISCOURSE_ADMIN_PASSWORD']
+  admin.username = UserNameSuggester.suggest(admin.email)
+  admin.save!
+  admin.grant_admin!
+  admin.change_trust_level!(4)
+  admin.email_tokens.update_all  confirmed: true
+  admin.activate
+end

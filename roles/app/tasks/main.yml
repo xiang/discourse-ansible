@@ -1,0 +1,34 @@
+---
+- name: create dir
+  file: path={{ app_path }} state=directory
+
+- name: deploy app
+  git: repo=https://github.com/discourse/discourse_docker.git dest={{ app_path }}
+
+  # from discourse-setup
+- name: set up swapfile
+  script: roles/app/files/swapfile.sh creates=/swapfile
+  when: (ansible_memtotal_mb < 1800 and ansible_swaptotal_mb < 1000)
+
+- include_vars: secrets.yml
+  no_log: true
+
+  # admin user creation relies on email but SES will only deliver to verified addresses
+  # so we'll ignore DISCOURSE_DEVELOPER_EMAILS and set our own env vars for creating the account directly
+- name: container config
+  template: src=templates/app.yml.j2 dest={{ app_path }}/containers/app.yml
+
+  # this takes a long time and ansible doesn't do realtime output
+- name: app bootstrap
+  shell: "{{ app_path }}/launcher bootstrap app && touch {{ app_path }}/.bootstrapped creates={{ app_path }}/.bootstrapped"
+
+- name: app start
+  command: "{{ app_path }}/launcher start app"
+  no_log: true
+
+- name: copy create_admin.rb
+  template: src=templates/create_admin.rb.j2 dest="{{ app_path }}/shared/standalone/create_admin.rb"
+  no_log: true
+
+- name: run create_admin.rb
+  command: docker exec app bash -c "rails runner /shared/create_admin.rb"

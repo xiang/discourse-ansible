@@ -1,0 +1,7 @@
+---
+- name: add docker yum repo
+  yum_repository:
+    name: docker
+    description: docker
+    baseurl: https://yum.dockerproject.org/repo/main/centos/7
+    gpgkey: https://yum.dockerproject.org/gpg

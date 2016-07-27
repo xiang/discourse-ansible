@@ -1,0 +1,14 @@
+---
+- name: repo setup and install
+  include: rhel.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+
+- name: repo setup and install
+  include: ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- name: install docker
+  package: name=docker-engine state=latest
+
+- name: start docker
+  service: name=docker state=started enabled=yes

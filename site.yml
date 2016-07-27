@@ -1,0 +1,10 @@
+---
+- name: blah
+  hosts: local
+  connection: local
+  become: true
+  vars:
+    app_path: /var/discourse
+  roles: 
+    - docker
+    - app
