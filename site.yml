@@ -1,6 +1,6 @@
 ---
 - name: discourse
-  hosts: local
+  hosts: localhost
   connection: local
   become: true
   roles: 
