@@ -53,7 +53,9 @@ env:
 
   ## TODO: List of comma delimited emails that will be made admin and developer
   ## on initial signup example 'user1@example.com,user2@example.com'
-  DISCOURSE_DEVELOPER_EMAILS: {{ discourse_developer_emails }}
+
+  # ignore DISCOURSE_DEVELOPER_EMAILS and use custom vars
+  DISCOURSE_DEVELOPER_EMAILS: 
   DISCOURSE_ADMIN_EMAIL: {{ discourse_admin_email }}    
   DISCOURSE_ADMIN_PASSWORD: {{ discourse_admin_password }}    
 

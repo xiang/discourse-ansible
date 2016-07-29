@@ -1,5 +1,4 @@
 ---
-discourse_hostname: discourse.zxiventures.com
-discourse_developer_emails: halfbreed@gmail.com
+app_path: /var/discourse
 discourse_smtp_address: email-smtp.us-east-1.amazonaws.com
 discourse_smtp_port: 587
