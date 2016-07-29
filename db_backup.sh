@@ -1,7 +1,7 @@
 BACKUP_PATH_CONTAINER=/shared/backups
 BACKUP_PATH_LOCAL=/var/discourse/shared/standalone/backups
 BACKUP_FILE=discourse-backup.sql
-REMOTE_HOST=halfbreed@104.196.158.216
+REMOTE_HOST=
 
 echo 'Running pg_dump'
 sudo docker exec -u discourse app bash -c \
