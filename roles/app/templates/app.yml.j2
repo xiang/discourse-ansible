@@ -45,7 +45,7 @@ env:
   UNICORN_WORKERS: 2
 
   ## TODO: The domain name this Discourse instance will respond to
-  DISCOURSE_HOSTNAME: {{ discourse_hostname }}
+  #DISCOURSE_HOSTNAME: 
   
   ## Uncomment if you want the container to be started with the same
   ## hostname (-h option) as specified above (default "$hostname-$config")
@@ -55,7 +55,7 @@ env:
   ## on initial signup example 'user1@example.com,user2@example.com'
 
   # ignore DISCOURSE_DEVELOPER_EMAILS and use custom vars
-  DISCOURSE_DEVELOPER_EMAILS: 
+  #DISCOURSE_DEVELOPER_EMAILS: 
   DISCOURSE_ADMIN_EMAIL: {{ discourse_admin_email }}    
   DISCOURSE_ADMIN_PASSWORD: {{ discourse_admin_password }}    
 
