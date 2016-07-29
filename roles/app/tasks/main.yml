@@ -21,6 +21,7 @@
   # this takes a long time and ansible doesn't do realtime output
 - name: app bootstrap
   shell: "{{ app_path }}/launcher bootstrap app && touch {{ app_path }}/.bootstrapped creates={{ app_path }}/.bootstrapped"
+  no_log: true
 
 - name: app start
   command: "{{ app_path }}/launcher start app"
